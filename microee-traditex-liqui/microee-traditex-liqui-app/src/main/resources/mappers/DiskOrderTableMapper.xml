@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.DiskOrderTableMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.DiskOrderTable">
+    <id column="disk_client_order_id" jdbcType="VARCHAR" property="diskClientOrderId" />
+    <result column="disk_result_order_id" jdbcType="VARCHAR" property="diskResultOrderId" />
+    <result column="order_book_id" jdbcType="VARCHAR" property="orderBookId" />
+    <result column="vender" jdbcType="VARCHAR" property="vender" />
+    <result column="target_symbol" jdbcType="VARCHAR" property="targetSymbol" />
+    <result column="target_side" jdbcType="CHAR" property="targetSide" />
+    <result column="target_amount" jdbcType="DECIMAL" property="targetAmount" />
+    <result column="target_price" jdbcType="DECIMAL" property="targetPrice" />
+    <result column="usdt_price" jdbcType="DECIMAL" property="usdtPrice" />
+    <result column="usd_currency_pricing" jdbcType="DECIMAL" property="usdCurrencyPricing" />
+    <result column="usdt_usd_rate" jdbcType="DECIMAL" property="usdtUsdRate" />
+    <result column="disk_amount" jdbcType="DECIMAL" property="diskAmount" />
+    <result column="disk_price" jdbcType="DECIMAL" property="diskPrice" />
+    <result column="disk_price_prec" jdbcType="INTEGER" property="diskPricePrec" />
+    <result column="disk_amount_prec" jdbcType="INTEGER" property="diskAmountPrec" />
+    <result column="disk_order_type" jdbcType="VARCHAR" property="diskOrderType" />
+    <result column="disk_account" jdbcType="VARCHAR" property="diskAccount" />
+    <result column="disk_order_result" jdbcType="VARCHAR" property="diskOrderResult" />
+    <result column="disk_ocst" jdbcType="INTEGER" property="diskOcst" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    disk_client_order_id, disk_result_order_id, order_book_id, vender, target_symbol, 
+    target_side, target_amount, target_price, usdt_price, usd_currency_pricing, usdt_usd_rate, 
+    disk_amount, disk_price, disk_price_prec, disk_amount_prec, disk_order_type, disk_account, 
+    disk_order_result, disk_ocst, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_disk_table
+    where disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderTable">
+    insert into t_order_disk_table (disk_client_order_id, disk_result_order_id, 
+      order_book_id, vender, target_symbol, 
+      target_side, target_amount, target_price, 
+      usdt_price, usd_currency_pricing, usdt_usd_rate, 
+      disk_amount, disk_price, disk_price_prec, 
+      disk_amount_prec, disk_order_type, disk_account, 
+      disk_order_result, disk_ocst, created_at
+      )
+    values (#{diskClientOrderId,jdbcType=VARCHAR}, #{diskResultOrderId,jdbcType=VARCHAR}, 
+      #{orderBookId,jdbcType=VARCHAR}, #{vender,jdbcType=VARCHAR}, #{targetSymbol,jdbcType=VARCHAR}, 
+      #{targetSide,jdbcType=CHAR}, #{targetAmount,jdbcType=DECIMAL}, #{targetPrice,jdbcType=DECIMAL}, 
+      #{usdtPrice,jdbcType=DECIMAL}, #{usdCurrencyPricing,jdbcType=DECIMAL}, #{usdtUsdRate,jdbcType=DECIMAL}, 
+      #{diskAmount,jdbcType=DECIMAL}, #{diskPrice,jdbcType=DECIMAL}, #{diskPricePrec,jdbcType=INTEGER}, 
+      #{diskAmountPrec,jdbcType=INTEGER}, #{diskOrderType,jdbcType=VARCHAR}, #{diskAccount,jdbcType=VARCHAR}, 
+      #{diskOrderResult,jdbcType=VARCHAR}, #{diskOcst,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderTable">
+    insert into t_order_disk_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="diskClientOrderId != null">
+        disk_client_order_id,
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id,
+      </if>
+      <if test="orderBookId != null">
+        order_book_id,
+      </if>
+      <if test="vender != null">
+        vender,
+      </if>
+      <if test="targetSymbol != null">
+        target_symbol,
+      </if>
+      <if test="targetSide != null">
+        target_side,
+      </if>
+      <if test="targetAmount != null">
+        target_amount,
+      </if>
+      <if test="targetPrice != null">
+        target_price,
+      </if>
+      <if test="usdtPrice != null">
+        usdt_price,
+      </if>
+      <if test="usdCurrencyPricing != null">
+        usd_currency_pricing,
+      </if>
+      <if test="usdtUsdRate != null">
+        usdt_usd_rate,
+      </if>
+      <if test="diskAmount != null">
+        disk_amount,
+      </if>
+      <if test="diskPrice != null">
+        disk_price,
+      </if>
+      <if test="diskPricePrec != null">
+        disk_price_prec,
+      </if>
+      <if test="diskAmountPrec != null">
+        disk_amount_prec,
+      </if>
+      <if test="diskOrderType != null">
+        disk_order_type,
+      </if>
+      <if test="diskAccount != null">
+        disk_account,
+      </if>
+      <if test="diskOrderResult != null">
+        disk_order_result,
+      </if>
+      <if test="diskOcst != null">
+        disk_ocst,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="diskClientOrderId != null">
+        #{diskClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        #{orderBookId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="targetSymbol != null">
+        #{targetSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="targetSide != null">
+        #{targetSide,jdbcType=CHAR},
+      </if>
+      <if test="targetAmount != null">
+        #{targetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="targetPrice != null">
+        #{targetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtPrice != null">
+        #{usdtPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="usdCurrencyPricing != null">
+        #{usdCurrencyPricing,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtUsdRate != null">
+        #{usdtUsdRate,jdbcType=DECIMAL},
+      </if>
+      <if test="diskAmount != null">
+        #{diskAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskPrice != null">
+        #{diskPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="diskPricePrec != null">
+        #{diskPricePrec,jdbcType=INTEGER},
+      </if>
+      <if test="diskAmountPrec != null">
+        #{diskAmountPrec,jdbcType=INTEGER},
+      </if>
+      <if test="diskOrderType != null">
+        #{diskOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="diskAccount != null">
+        #{diskAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderResult != null">
+        #{diskOrderResult,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOcst != null">
+        #{diskOcst,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderTable">
+    update t_order_disk_table
+    <set>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        order_book_id = #{orderBookId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        vender = #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="targetSymbol != null">
+        target_symbol = #{targetSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="targetSide != null">
+        target_side = #{targetSide,jdbcType=CHAR},
+      </if>
+      <if test="targetAmount != null">
+        target_amount = #{targetAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="targetPrice != null">
+        target_price = #{targetPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtPrice != null">
+        usdt_price = #{usdtPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="usdCurrencyPricing != null">
+        usd_currency_pricing = #{usdCurrencyPricing,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtUsdRate != null">
+        usdt_usd_rate = #{usdtUsdRate,jdbcType=DECIMAL},
+      </if>
+      <if test="diskAmount != null">
+        disk_amount = #{diskAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskPrice != null">
+        disk_price = #{diskPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="diskPricePrec != null">
+        disk_price_prec = #{diskPricePrec,jdbcType=INTEGER},
+      </if>
+      <if test="diskAmountPrec != null">
+        disk_amount_prec = #{diskAmountPrec,jdbcType=INTEGER},
+      </if>
+      <if test="diskOrderType != null">
+        disk_order_type = #{diskOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="diskAccount != null">
+        disk_account = #{diskAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderResult != null">
+        disk_order_result = #{diskOrderResult,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOcst != null">
+        disk_ocst = #{diskOcst,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderTable">
+    update t_order_disk_table
+    set disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      order_book_id = #{orderBookId,jdbcType=VARCHAR},
+      vender = #{vender,jdbcType=VARCHAR},
+      target_symbol = #{targetSymbol,jdbcType=VARCHAR},
+      target_side = #{targetSide,jdbcType=CHAR},
+      target_amount = #{targetAmount,jdbcType=DECIMAL},
+      target_price = #{targetPrice,jdbcType=DECIMAL},
+      usdt_price = #{usdtPrice,jdbcType=DECIMAL},
+      usd_currency_pricing = #{usdCurrencyPricing,jdbcType=DECIMAL},
+      usdt_usd_rate = #{usdtUsdRate,jdbcType=DECIMAL},
+      disk_amount = #{diskAmount,jdbcType=DECIMAL},
+      disk_price = #{diskPrice,jdbcType=DECIMAL},
+      disk_price_prec = #{diskPricePrec,jdbcType=INTEGER},
+      disk_amount_prec = #{diskAmountPrec,jdbcType=INTEGER},
+      disk_order_type = #{diskOrderType,jdbcType=VARCHAR},
+      disk_account = #{diskAccount,jdbcType=VARCHAR},
+      disk_order_result = #{diskOrderResult,jdbcType=VARCHAR},
+      disk_ocst = #{diskOcst,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

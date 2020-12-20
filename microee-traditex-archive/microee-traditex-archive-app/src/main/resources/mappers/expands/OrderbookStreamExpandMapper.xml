@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.microee.traditex.archive.app.mappers.OrderbookStreamMapper">
+    <select id="archive" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_orderbook_stream
+        <where>
+            order_book_id > (
+                select last_id from (
+                    select '-' id, '-' last_id union all
+                    select id, last_id from t_liquid_archive_record where the_table_name='t_orderbook_stream' order by id desc limit 1
+                ) as a
+            ) and created_at &lt; current_timestamp(3) limit #{size,jdbcType=INTEGER};
+        </where>
+    </select>
+    <delete id="delete" parameterType="string">
+        delete from t_orderbook_stream where order_book_id &lt;= #{lastId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

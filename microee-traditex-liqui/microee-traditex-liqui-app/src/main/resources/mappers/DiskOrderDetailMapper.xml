@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.DiskOrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.DiskOrderDetail">
+    <id column="disk_detail_id" jdbcType="VARCHAR" property="diskDetailId" />
+    <result column="disk_client_order_id" jdbcType="VARCHAR" property="diskClientOrderId" />
+    <result column="disk_result_order_id" jdbcType="VARCHAR" property="diskResultOrderId" />
+    <result column="match_id" jdbcType="VARCHAR" property="matchId" />
+    <result column="vender" jdbcType="VARCHAR" property="vender" />
+    <result column="disk_order_symbol" jdbcType="VARCHAR" property="diskOrderSymbol" />
+    <result column="disk_filled_amount" jdbcType="DECIMAL" property="diskFilledAmount" />
+    <result column="disk_filled_price" jdbcType="DECIMAL" property="diskFilledPrice" />
+    <result column="filled_cash_amount" jdbcType="DECIMAL" property="filledCashAmount" />
+    <result column="disk_order_state" jdbcType="VARCHAR" property="diskOrderState" />
+    <result column="disk_order_type" jdbcType="VARCHAR" property="diskOrderType" />
+    <result column="unfilled_amount" jdbcType="DECIMAL" property="unfilledAmount" />
+    <result column="emitter_time" jdbcType="TIMESTAMP" property="emitterTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    disk_detail_id, disk_client_order_id, disk_result_order_id, match_id, vender, disk_order_symbol, 
+    disk_filled_amount, disk_filled_price, filled_cash_amount, disk_order_state, disk_order_type, 
+    unfilled_amount, emitter_time, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_disk_detail
+    where disk_detail_id = #{diskDetailId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderDetail">
+    insert into t_order_disk_detail (disk_detail_id, disk_client_order_id, 
+      disk_result_order_id, match_id, vender, 
+      disk_order_symbol, disk_filled_amount, disk_filled_price, 
+      filled_cash_amount, disk_order_state, disk_order_type, 
+      unfilled_amount, emitter_time, created_at
+      )
+    values (#{diskDetailId,jdbcType=VARCHAR}, #{diskClientOrderId,jdbcType=VARCHAR}, 
+      #{diskResultOrderId,jdbcType=VARCHAR}, #{matchId,jdbcType=VARCHAR}, #{vender,jdbcType=VARCHAR}, 
+      #{diskOrderSymbol,jdbcType=VARCHAR}, #{diskFilledAmount,jdbcType=DECIMAL}, #{diskFilledPrice,jdbcType=DECIMAL}, 
+      #{filledCashAmount,jdbcType=DECIMAL}, #{diskOrderState,jdbcType=VARCHAR}, #{diskOrderType,jdbcType=VARCHAR}, 
+      #{unfilledAmount,jdbcType=DECIMAL}, #{emitterTime,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderDetail">
+    insert into t_order_disk_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="diskDetailId != null">
+        disk_detail_id,
+      </if>
+      <if test="diskClientOrderId != null">
+        disk_client_order_id,
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id,
+      </if>
+      <if test="matchId != null">
+        match_id,
+      </if>
+      <if test="vender != null">
+        vender,
+      </if>
+      <if test="diskOrderSymbol != null">
+        disk_order_symbol,
+      </if>
+      <if test="diskFilledAmount != null">
+        disk_filled_amount,
+      </if>
+      <if test="diskFilledPrice != null">
+        disk_filled_price,
+      </if>
+      <if test="filledCashAmount != null">
+        filled_cash_amount,
+      </if>
+      <if test="diskOrderState != null">
+        disk_order_state,
+      </if>
+      <if test="diskOrderType != null">
+        disk_order_type,
+      </if>
+      <if test="unfilledAmount != null">
+        unfilled_amount,
+      </if>
+      <if test="emitterTime != null">
+        emitter_time,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="diskDetailId != null">
+        #{diskDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskClientOrderId != null">
+        #{diskClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderSymbol != null">
+        #{diskOrderSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFilledAmount != null">
+        #{diskFilledAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskFilledPrice != null">
+        #{diskFilledPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="filledCashAmount != null">
+        #{filledCashAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskOrderState != null">
+        #{diskOrderState,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderType != null">
+        #{diskOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="unfilledAmount != null">
+        #{unfilledAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="emitterTime != null">
+        #{emitterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderDetail">
+    update t_order_disk_detail
+    <set>
+      <if test="diskClientOrderId != null">
+        disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="matchId != null">
+        match_id = #{matchId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        vender = #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderSymbol != null">
+        disk_order_symbol = #{diskOrderSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFilledAmount != null">
+        disk_filled_amount = #{diskFilledAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskFilledPrice != null">
+        disk_filled_price = #{diskFilledPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="filledCashAmount != null">
+        filled_cash_amount = #{filledCashAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="diskOrderState != null">
+        disk_order_state = #{diskOrderState,jdbcType=VARCHAR},
+      </if>
+      <if test="diskOrderType != null">
+        disk_order_type = #{diskOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="unfilledAmount != null">
+        unfilled_amount = #{unfilledAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="emitterTime != null">
+        emitter_time = #{emitterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where disk_detail_id = #{diskDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.DiskOrderDetail">
+    update t_order_disk_detail
+    set disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR},
+      disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      match_id = #{matchId,jdbcType=VARCHAR},
+      vender = #{vender,jdbcType=VARCHAR},
+      disk_order_symbol = #{diskOrderSymbol,jdbcType=VARCHAR},
+      disk_filled_amount = #{diskFilledAmount,jdbcType=DECIMAL},
+      disk_filled_price = #{diskFilledPrice,jdbcType=DECIMAL},
+      filled_cash_amount = #{filledCashAmount,jdbcType=DECIMAL},
+      disk_order_state = #{diskOrderState,jdbcType=VARCHAR},
+      disk_order_type = #{diskOrderType,jdbcType=VARCHAR},
+      unfilled_amount = #{unfilledAmount,jdbcType=DECIMAL},
+      emitter_time = #{emitterTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where disk_detail_id = #{diskDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

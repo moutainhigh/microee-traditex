@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.LiquiRiskAlarmSettingsMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.LiquiRiskAlarmSettings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="strategy_id" jdbcType="BIGINT" property="strategyId" />
+    <result column="liquidity_symbol" jdbcType="VARCHAR" property="liquiditySymbol" />
+    <result column="disk_base" jdbcType="VARCHAR" property="diskBase" />
+    <result column="disk_quote" jdbcType="VARCHAR" property="diskQuote" />
+    <result column="exchange_base" jdbcType="VARCHAR" property="exchangeBase" />
+    <result column="exchange_quote" jdbcType="VARCHAR" property="exchangeQuote" />
+    <result column="liquidity_warn_disk_base_pos" jdbcType="VARCHAR" property="liquidityWarnDiskBasePos" />
+    <result column="liquidity_warn_exchange_quote_pos" jdbcType="VARCHAR" property="liquidityWarnExchangeQuotePos" />
+    <result column="liquidity_warn_network_delay" jdbcType="VARCHAR" property="liquidityWarnNetworkDelay" />
+    <result column="disk_warn_disk_base_pos" jdbcType="VARCHAR" property="diskWarnDiskBasePos" />
+    <result column="disk_warn_disk_quote_pos" jdbcType="VARCHAR" property="diskWarnDiskQuotePos" />
+    <result column="disk_warn_network_delay" jdbcType="VARCHAR" property="diskWarnNetworkDelay" />
+    <result column="exchange_warn_exchange_base_pos" jdbcType="VARCHAR" property="exchangeWarnExchangeBasePos" />
+    <result column="exchange_warn_exchange_quote_pos" jdbcType="VARCHAR" property="exchangeWarnExchangeQuotePos" />
+    <result column="exchange_warn_network_delay" jdbcType="VARCHAR" property="exchangeWarnNetworkDelay" />
+    <result column="pnl_warn_day_total" jdbcType="VARCHAR" property="pnlWarnDayTotal" />
+    <result column="pnl_warn_week_total" jdbcType="VARCHAR" property="pnlWarnWeekTotal" />
+    <result column="pnl_warn_month_total" jdbcType="VARCHAR" property="pnlWarnMonthTotal" />
+    <result column="liquidity_fuse_disk_base_pos" jdbcType="VARCHAR" property="liquidityFuseDiskBasePos" />
+    <result column="liquidity_fuse_exchange_quote_pos" jdbcType="VARCHAR" property="liquidityFuseExchangeQuotePos" />
+    <result column="liquidity_fuse_network_delay" jdbcType="VARCHAR" property="liquidityFuseNetworkDelay" />
+    <result column="disk_fuse_disk_base_pos" jdbcType="VARCHAR" property="diskFuseDiskBasePos" />
+    <result column="disk_fuse_disk_quote_pos" jdbcType="VARCHAR" property="diskFuseDiskQuotePos" />
+    <result column="disk_fuse_network_delay" jdbcType="VARCHAR" property="diskFuseNetworkDelay" />
+    <result column="exchange_fuse_exchange_base_pos" jdbcType="VARCHAR" property="exchangeFuseExchangeBasePos" />
+    <result column="exchange_fuse_exchange_quote_pos" jdbcType="VARCHAR" property="exchangeFuseExchangeQuotePos" />
+    <result column="exchange_fuse_network_delay" jdbcType="VARCHAR" property="exchangeFuseNetworkDelay" />
+    <result column="pnl_fuse_day_total" jdbcType="VARCHAR" property="pnlFuseDayTotal" />
+    <result column="pnl_fuse_week_total" jdbcType="VARCHAR" property="pnlFuseWeekTotal" />
+    <result column="pnl_fuse_month_total" jdbcType="VARCHAR" property="pnlFuseMonthTotal" />
+    <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="operator_id" jdbcType="VARCHAR" property="operatorId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, strategy_id, liquidity_symbol, disk_base, disk_quote, exchange_base, exchange_quote, 
+    liquidity_warn_disk_base_pos, liquidity_warn_exchange_quote_pos, liquidity_warn_network_delay, 
+    disk_warn_disk_base_pos, disk_warn_disk_quote_pos, disk_warn_network_delay, exchange_warn_exchange_base_pos, 
+    exchange_warn_exchange_quote_pos, exchange_warn_network_delay, pnl_warn_day_total, 
+    pnl_warn_week_total, pnl_warn_month_total, liquidity_fuse_disk_base_pos, liquidity_fuse_exchange_quote_pos, 
+    liquidity_fuse_network_delay, disk_fuse_disk_base_pos, disk_fuse_disk_quote_pos, 
+    disk_fuse_network_delay, exchange_fuse_exchange_base_pos, exchange_fuse_exchange_quote_pos, 
+    exchange_fuse_network_delay, pnl_fuse_day_total, pnl_fuse_week_total, pnl_fuse_month_total, 
+    gmt_created, gmt_modified, operator_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_liquidity_alarm_settings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskAlarmSettings">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_liquidity_alarm_settings (strategy_id, liquidity_symbol, disk_base, 
+      disk_quote, exchange_base, exchange_quote, 
+      liquidity_warn_disk_base_pos, liquidity_warn_exchange_quote_pos, 
+      liquidity_warn_network_delay, disk_warn_disk_base_pos, 
+      disk_warn_disk_quote_pos, disk_warn_network_delay, 
+      exchange_warn_exchange_base_pos, exchange_warn_exchange_quote_pos, 
+      exchange_warn_network_delay, pnl_warn_day_total, 
+      pnl_warn_week_total, pnl_warn_month_total, liquidity_fuse_disk_base_pos, 
+      liquidity_fuse_exchange_quote_pos, liquidity_fuse_network_delay, 
+      disk_fuse_disk_base_pos, disk_fuse_disk_quote_pos, 
+      disk_fuse_network_delay, exchange_fuse_exchange_base_pos, 
+      exchange_fuse_exchange_quote_pos, exchange_fuse_network_delay, 
+      pnl_fuse_day_total, pnl_fuse_week_total, pnl_fuse_month_total, 
+      gmt_created, gmt_modified, operator_id
+      )
+    values (#{strategyId,jdbcType=BIGINT}, #{liquiditySymbol,jdbcType=VARCHAR}, #{diskBase,jdbcType=VARCHAR}, 
+      #{diskQuote,jdbcType=VARCHAR}, #{exchangeBase,jdbcType=VARCHAR}, #{exchangeQuote,jdbcType=VARCHAR}, 
+      #{liquidityWarnDiskBasePos,jdbcType=VARCHAR}, #{liquidityWarnExchangeQuotePos,jdbcType=VARCHAR}, 
+      #{liquidityWarnNetworkDelay,jdbcType=VARCHAR}, #{diskWarnDiskBasePos,jdbcType=VARCHAR}, 
+      #{diskWarnDiskQuotePos,jdbcType=VARCHAR}, #{diskWarnNetworkDelay,jdbcType=VARCHAR}, 
+      #{exchangeWarnExchangeBasePos,jdbcType=VARCHAR}, #{exchangeWarnExchangeQuotePos,jdbcType=VARCHAR}, 
+      #{exchangeWarnNetworkDelay,jdbcType=VARCHAR}, #{pnlWarnDayTotal,jdbcType=VARCHAR}, 
+      #{pnlWarnWeekTotal,jdbcType=VARCHAR}, #{pnlWarnMonthTotal,jdbcType=VARCHAR}, #{liquidityFuseDiskBasePos,jdbcType=VARCHAR}, 
+      #{liquidityFuseExchangeQuotePos,jdbcType=VARCHAR}, #{liquidityFuseNetworkDelay,jdbcType=VARCHAR}, 
+      #{diskFuseDiskBasePos,jdbcType=VARCHAR}, #{diskFuseDiskQuotePos,jdbcType=VARCHAR}, 
+      #{diskFuseNetworkDelay,jdbcType=VARCHAR}, #{exchangeFuseExchangeBasePos,jdbcType=VARCHAR}, 
+      #{exchangeFuseExchangeQuotePos,jdbcType=VARCHAR}, #{exchangeFuseNetworkDelay,jdbcType=VARCHAR}, 
+      #{pnlFuseDayTotal,jdbcType=VARCHAR}, #{pnlFuseWeekTotal,jdbcType=VARCHAR}, #{pnlFuseMonthTotal,jdbcType=VARCHAR}, 
+      #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskAlarmSettings">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_liquidity_alarm_settings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="strategyId != null">
+        strategy_id,
+      </if>
+      <if test="liquiditySymbol != null">
+        liquidity_symbol,
+      </if>
+      <if test="diskBase != null">
+        disk_base,
+      </if>
+      <if test="diskQuote != null">
+        disk_quote,
+      </if>
+      <if test="exchangeBase != null">
+        exchange_base,
+      </if>
+      <if test="exchangeQuote != null">
+        exchange_quote,
+      </if>
+      <if test="liquidityWarnDiskBasePos != null">
+        liquidity_warn_disk_base_pos,
+      </if>
+      <if test="liquidityWarnExchangeQuotePos != null">
+        liquidity_warn_exchange_quote_pos,
+      </if>
+      <if test="liquidityWarnNetworkDelay != null">
+        liquidity_warn_network_delay,
+      </if>
+      <if test="diskWarnDiskBasePos != null">
+        disk_warn_disk_base_pos,
+      </if>
+      <if test="diskWarnDiskQuotePos != null">
+        disk_warn_disk_quote_pos,
+      </if>
+      <if test="diskWarnNetworkDelay != null">
+        disk_warn_network_delay,
+      </if>
+      <if test="exchangeWarnExchangeBasePos != null">
+        exchange_warn_exchange_base_pos,
+      </if>
+      <if test="exchangeWarnExchangeQuotePos != null">
+        exchange_warn_exchange_quote_pos,
+      </if>
+      <if test="exchangeWarnNetworkDelay != null">
+        exchange_warn_network_delay,
+      </if>
+      <if test="pnlWarnDayTotal != null">
+        pnl_warn_day_total,
+      </if>
+      <if test="pnlWarnWeekTotal != null">
+        pnl_warn_week_total,
+      </if>
+      <if test="pnlWarnMonthTotal != null">
+        pnl_warn_month_total,
+      </if>
+      <if test="liquidityFuseDiskBasePos != null">
+        liquidity_fuse_disk_base_pos,
+      </if>
+      <if test="liquidityFuseExchangeQuotePos != null">
+        liquidity_fuse_exchange_quote_pos,
+      </if>
+      <if test="liquidityFuseNetworkDelay != null">
+        liquidity_fuse_network_delay,
+      </if>
+      <if test="diskFuseDiskBasePos != null">
+        disk_fuse_disk_base_pos,
+      </if>
+      <if test="diskFuseDiskQuotePos != null">
+        disk_fuse_disk_quote_pos,
+      </if>
+      <if test="diskFuseNetworkDelay != null">
+        disk_fuse_network_delay,
+      </if>
+      <if test="exchangeFuseExchangeBasePos != null">
+        exchange_fuse_exchange_base_pos,
+      </if>
+      <if test="exchangeFuseExchangeQuotePos != null">
+        exchange_fuse_exchange_quote_pos,
+      </if>
+      <if test="exchangeFuseNetworkDelay != null">
+        exchange_fuse_network_delay,
+      </if>
+      <if test="pnlFuseDayTotal != null">
+        pnl_fuse_day_total,
+      </if>
+      <if test="pnlFuseWeekTotal != null">
+        pnl_fuse_week_total,
+      </if>
+      <if test="pnlFuseMonthTotal != null">
+        pnl_fuse_month_total,
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="strategyId != null">
+        #{strategyId,jdbcType=BIGINT},
+      </if>
+      <if test="liquiditySymbol != null">
+        #{liquiditySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskBase != null">
+        #{diskBase,jdbcType=VARCHAR},
+      </if>
+      <if test="diskQuote != null">
+        #{diskQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBase != null">
+        #{exchangeBase,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeQuote != null">
+        #{exchangeQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnDiskBasePos != null">
+        #{liquidityWarnDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnExchangeQuotePos != null">
+        #{liquidityWarnExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnNetworkDelay != null">
+        #{liquidityWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnDiskBasePos != null">
+        #{diskWarnDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnDiskQuotePos != null">
+        #{diskWarnDiskQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnNetworkDelay != null">
+        #{diskWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnExchangeBasePos != null">
+        #{exchangeWarnExchangeBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnExchangeQuotePos != null">
+        #{exchangeWarnExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnNetworkDelay != null">
+        #{exchangeWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnDayTotal != null">
+        #{pnlWarnDayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnWeekTotal != null">
+        #{pnlWarnWeekTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnMonthTotal != null">
+        #{pnlWarnMonthTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseDiskBasePos != null">
+        #{liquidityFuseDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseExchangeQuotePos != null">
+        #{liquidityFuseExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseNetworkDelay != null">
+        #{liquidityFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseDiskBasePos != null">
+        #{diskFuseDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseDiskQuotePos != null">
+        #{diskFuseDiskQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseNetworkDelay != null">
+        #{diskFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseExchangeBasePos != null">
+        #{exchangeFuseExchangeBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseExchangeQuotePos != null">
+        #{exchangeFuseExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseNetworkDelay != null">
+        #{exchangeFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseDayTotal != null">
+        #{pnlFuseDayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseWeekTotal != null">
+        #{pnlFuseWeekTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseMonthTotal != null">
+        #{pnlFuseMonthTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskAlarmSettings">
+    update t_liquidity_alarm_settings
+    <set>
+      <if test="strategyId != null">
+        strategy_id = #{strategyId,jdbcType=BIGINT},
+      </if>
+      <if test="liquiditySymbol != null">
+        liquidity_symbol = #{liquiditySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskBase != null">
+        disk_base = #{diskBase,jdbcType=VARCHAR},
+      </if>
+      <if test="diskQuote != null">
+        disk_quote = #{diskQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBase != null">
+        exchange_base = #{exchangeBase,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeQuote != null">
+        exchange_quote = #{exchangeQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnDiskBasePos != null">
+        liquidity_warn_disk_base_pos = #{liquidityWarnDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnExchangeQuotePos != null">
+        liquidity_warn_exchange_quote_pos = #{liquidityWarnExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityWarnNetworkDelay != null">
+        liquidity_warn_network_delay = #{liquidityWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnDiskBasePos != null">
+        disk_warn_disk_base_pos = #{diskWarnDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnDiskQuotePos != null">
+        disk_warn_disk_quote_pos = #{diskWarnDiskQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskWarnNetworkDelay != null">
+        disk_warn_network_delay = #{diskWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnExchangeBasePos != null">
+        exchange_warn_exchange_base_pos = #{exchangeWarnExchangeBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnExchangeQuotePos != null">
+        exchange_warn_exchange_quote_pos = #{exchangeWarnExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeWarnNetworkDelay != null">
+        exchange_warn_network_delay = #{exchangeWarnNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnDayTotal != null">
+        pnl_warn_day_total = #{pnlWarnDayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnWeekTotal != null">
+        pnl_warn_week_total = #{pnlWarnWeekTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlWarnMonthTotal != null">
+        pnl_warn_month_total = #{pnlWarnMonthTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseDiskBasePos != null">
+        liquidity_fuse_disk_base_pos = #{liquidityFuseDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseExchangeQuotePos != null">
+        liquidity_fuse_exchange_quote_pos = #{liquidityFuseExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="liquidityFuseNetworkDelay != null">
+        liquidity_fuse_network_delay = #{liquidityFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseDiskBasePos != null">
+        disk_fuse_disk_base_pos = #{diskFuseDiskBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseDiskQuotePos != null">
+        disk_fuse_disk_quote_pos = #{diskFuseDiskQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFuseNetworkDelay != null">
+        disk_fuse_network_delay = #{diskFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseExchangeBasePos != null">
+        exchange_fuse_exchange_base_pos = #{exchangeFuseExchangeBasePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseExchangeQuotePos != null">
+        exchange_fuse_exchange_quote_pos = #{exchangeFuseExchangeQuotePos,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeFuseNetworkDelay != null">
+        exchange_fuse_network_delay = #{exchangeFuseNetworkDelay,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseDayTotal != null">
+        pnl_fuse_day_total = #{pnlFuseDayTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseWeekTotal != null">
+        pnl_fuse_week_total = #{pnlFuseWeekTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="pnlFuseMonthTotal != null">
+        pnl_fuse_month_total = #{pnlFuseMonthTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskAlarmSettings">
+    update t_liquidity_alarm_settings
+    set strategy_id = #{strategyId,jdbcType=BIGINT},
+      liquidity_symbol = #{liquiditySymbol,jdbcType=VARCHAR},
+      disk_base = #{diskBase,jdbcType=VARCHAR},
+      disk_quote = #{diskQuote,jdbcType=VARCHAR},
+      exchange_base = #{exchangeBase,jdbcType=VARCHAR},
+      exchange_quote = #{exchangeQuote,jdbcType=VARCHAR},
+      liquidity_warn_disk_base_pos = #{liquidityWarnDiskBasePos,jdbcType=VARCHAR},
+      liquidity_warn_exchange_quote_pos = #{liquidityWarnExchangeQuotePos,jdbcType=VARCHAR},
+      liquidity_warn_network_delay = #{liquidityWarnNetworkDelay,jdbcType=VARCHAR},
+      disk_warn_disk_base_pos = #{diskWarnDiskBasePos,jdbcType=VARCHAR},
+      disk_warn_disk_quote_pos = #{diskWarnDiskQuotePos,jdbcType=VARCHAR},
+      disk_warn_network_delay = #{diskWarnNetworkDelay,jdbcType=VARCHAR},
+      exchange_warn_exchange_base_pos = #{exchangeWarnExchangeBasePos,jdbcType=VARCHAR},
+      exchange_warn_exchange_quote_pos = #{exchangeWarnExchangeQuotePos,jdbcType=VARCHAR},
+      exchange_warn_network_delay = #{exchangeWarnNetworkDelay,jdbcType=VARCHAR},
+      pnl_warn_day_total = #{pnlWarnDayTotal,jdbcType=VARCHAR},
+      pnl_warn_week_total = #{pnlWarnWeekTotal,jdbcType=VARCHAR},
+      pnl_warn_month_total = #{pnlWarnMonthTotal,jdbcType=VARCHAR},
+      liquidity_fuse_disk_base_pos = #{liquidityFuseDiskBasePos,jdbcType=VARCHAR},
+      liquidity_fuse_exchange_quote_pos = #{liquidityFuseExchangeQuotePos,jdbcType=VARCHAR},
+      liquidity_fuse_network_delay = #{liquidityFuseNetworkDelay,jdbcType=VARCHAR},
+      disk_fuse_disk_base_pos = #{diskFuseDiskBasePos,jdbcType=VARCHAR},
+      disk_fuse_disk_quote_pos = #{diskFuseDiskQuotePos,jdbcType=VARCHAR},
+      disk_fuse_network_delay = #{diskFuseNetworkDelay,jdbcType=VARCHAR},
+      exchange_fuse_exchange_base_pos = #{exchangeFuseExchangeBasePos,jdbcType=VARCHAR},
+      exchange_fuse_exchange_quote_pos = #{exchangeFuseExchangeQuotePos,jdbcType=VARCHAR},
+      exchange_fuse_network_delay = #{exchangeFuseNetworkDelay,jdbcType=VARCHAR},
+      pnl_fuse_day_total = #{pnlFuseDayTotal,jdbcType=VARCHAR},
+      pnl_fuse_week_total = #{pnlFuseWeekTotal,jdbcType=VARCHAR},
+      pnl_fuse_month_total = #{pnlFuseMonthTotal,jdbcType=VARCHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

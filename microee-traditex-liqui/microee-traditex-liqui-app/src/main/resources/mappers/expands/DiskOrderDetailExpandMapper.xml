@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.microee.traditex.liqui.app.mappers.DiskOrderDetailMapper">
+    <select id="selectByDiskOrderId"
+        parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_order_disk_detail
+        where disk_result_order_id = #{diskOrderId,jdbcType=VARCHAR} and disk_order_type in ('filled','partial-filled','canceled')
+    </select>
+</mapper>

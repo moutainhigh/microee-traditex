@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.archive.app.mappers.OrderbookStreamMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.archive.oem.models.OrderbookStream">
+    <id column="order_book_id" jdbcType="VARCHAR" property="orderBookId" />
+    <result column="book_id" jdbcType="VARCHAR" property="bookId" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="side" jdbcType="CHAR" property="side" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="vender" jdbcType="VARCHAR" property="vender" />
+    <result column="cal_type" jdbcType="INTEGER" property="calType" />
+    <result column="pick" jdbcType="INTEGER" property="pick" />
+    <result column="skip_code" jdbcType="INTEGER" property="skipCode" />
+    <result column="emitter_time" jdbcType="TIMESTAMP" property="emitterTime" />
+    <result column="reveive_time" jdbcType="TIMESTAMP" property="reveiveTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_book_id, book_id, symbol, side, amount, price, vender, cal_type, pick, skip_code, 
+    emitter_time, reveive_time, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_orderbook_stream
+    where order_book_id = #{orderBookId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.archive.oem.models.OrderbookStream">
+    insert into t_orderbook_stream (order_book_id, book_id, symbol, 
+      side, amount, price, vender, 
+      cal_type, pick, skip_code, 
+      emitter_time, reveive_time, created_at
+      )
+    values (#{orderBookId,jdbcType=VARCHAR}, #{bookId,jdbcType=VARCHAR}, #{symbol,jdbcType=VARCHAR}, 
+      #{side,jdbcType=CHAR}, #{amount,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{vender,jdbcType=VARCHAR}, 
+      #{calType,jdbcType=INTEGER}, #{pick,jdbcType=INTEGER}, #{skipCode,jdbcType=INTEGER}, 
+      #{emitterTime,jdbcType=TIMESTAMP}, #{reveiveTime,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.archive.oem.models.OrderbookStream">
+    insert into t_orderbook_stream
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderBookId != null">
+        order_book_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="side != null">
+        side,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="vender != null">
+        vender,
+      </if>
+      <if test="calType != null">
+        cal_type,
+      </if>
+      <if test="pick != null">
+        pick,
+      </if>
+      <if test="skipCode != null">
+        skip_code,
+      </if>
+      <if test="emitterTime != null">
+        emitter_time,
+      </if>
+      <if test="reveiveTime != null">
+        reveive_time,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderBookId != null">
+        #{orderBookId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="side != null">
+        #{side,jdbcType=CHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="vender != null">
+        #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="calType != null">
+        #{calType,jdbcType=INTEGER},
+      </if>
+      <if test="pick != null">
+        #{pick,jdbcType=INTEGER},
+      </if>
+      <if test="skipCode != null">
+        #{skipCode,jdbcType=INTEGER},
+      </if>
+      <if test="emitterTime != null">
+        #{emitterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reveiveTime != null">
+        #{reveiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.archive.oem.models.OrderbookStream">
+    update t_orderbook_stream
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="side != null">
+        side = #{side,jdbcType=CHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="vender != null">
+        vender = #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="calType != null">
+        cal_type = #{calType,jdbcType=INTEGER},
+      </if>
+      <if test="pick != null">
+        pick = #{pick,jdbcType=INTEGER},
+      </if>
+      <if test="skipCode != null">
+        skip_code = #{skipCode,jdbcType=INTEGER},
+      </if>
+      <if test="emitterTime != null">
+        emitter_time = #{emitterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reveiveTime != null">
+        reveive_time = #{reveiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_book_id = #{orderBookId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.archive.oem.models.OrderbookStream">
+    update t_orderbook_stream
+    set book_id = #{bookId,jdbcType=VARCHAR},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      side = #{side,jdbcType=CHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      vender = #{vender,jdbcType=VARCHAR},
+      cal_type = #{calType,jdbcType=INTEGER},
+      pick = #{pick,jdbcType=INTEGER},
+      skip_code = #{skipCode,jdbcType=INTEGER},
+      emitter_time = #{emitterTime,jdbcType=TIMESTAMP},
+      reveive_time = #{reveiveTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where order_book_id = #{orderBookId,jdbcType=VARCHAR}
+  </update>
+</mapper>

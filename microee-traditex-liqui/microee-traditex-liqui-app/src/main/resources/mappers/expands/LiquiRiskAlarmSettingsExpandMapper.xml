@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.microee.traditex.liqui.app.mappers.LiquiRiskAlarmSettingsMapper">
+    <select id="selectByIdAndSymbol" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM t_liquidity_alarm_settings
+        <where> 1=1
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="strategyId != null">
+                AND strategy_id = #{strategyId}
+            </if>
+            <if test="liquiditySymbol != null">
+                AND liquidity_symbol = #{liquiditySymbol}
+            </if> limit 1
+        </where>
+    </select>
+</mapper>

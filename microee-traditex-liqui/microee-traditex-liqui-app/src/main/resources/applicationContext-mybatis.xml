@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="com.microee.traditex.liqui.oem.models" />
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mappers/*.xml</value>
+                <value>classpath:mappers/expands/*.xml</value>
+            </array>
+        </property>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <value>
+                            reasonable=true
+                            supportMethodsArguments=true
+                            returnPageInfo=check
+                            params=count=countSql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="basePackage" value="com.microee.traditex.liqui.app.mappers" />
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSessionFactory" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+              p:dataSource-ref="dataSource" />
+
+    <aop:aspectj-autoproxy expose-proxy="true"
+                               proxy-target-class="true" />
+
+    <tx:advice id="txAdvice"
+                   transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="instert*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="create*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="new*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="submit*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="add*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="update*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="modify*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="delete*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="add*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="start*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="tx*" propagation="REQUIRED"
+                                   rollback-for="Exception" />
+            <tx:method name="*" read-only="true" propagation="SUPPORTS" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config proxy-target-class="true" expose-proxy="true">
+        <aop:pointcut id="pt" expression="execution(public * com.microee..service.*.*(..))" />
+        <aop:advisor pointcut-ref="pt" advice-ref="txAdvice" />
+    </aop:config>
+</beans>

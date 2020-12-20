@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.RevokeOrderRecordMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.RevokeOrderRecord">
+    <id column="disk_order_revoke_id" jdbcType="VARCHAR" property="diskOrderRevokeId" />
+    <result column="disk_result_order_id" jdbcType="VARCHAR" property="diskResultOrderId" />
+    <result column="vender" jdbcType="VARCHAR" property="vender" />
+    <result column="revoke_orst" jdbcType="INTEGER" property="revokeOrst" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="error_code" jdbcType="VARCHAR" property="errorCode" />
+    <result column="error_message" jdbcType="VARCHAR" property="errorMessage" />
+    <result column="order_book_id" jdbcType="VARCHAR" property="orderBookId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    disk_order_revoke_id, disk_result_order_id, vender, revoke_orst, start_time, end_time, 
+    created_at, error_code, error_message, order_book_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_revoke_record
+    where disk_order_revoke_id = #{diskOrderRevokeId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.RevokeOrderRecord">
+    insert into t_order_revoke_record (disk_order_revoke_id, disk_result_order_id, 
+      vender, revoke_orst, start_time, 
+      end_time, created_at, error_code, 
+      error_message, order_book_id)
+    values (#{diskOrderRevokeId,jdbcType=VARCHAR}, #{diskResultOrderId,jdbcType=VARCHAR}, 
+      #{vender,jdbcType=VARCHAR}, #{revokeOrst,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{createdAt,jdbcType=TIMESTAMP}, #{errorCode,jdbcType=VARCHAR}, 
+      #{errorMessage,jdbcType=VARCHAR}, #{orderBookId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.RevokeOrderRecord">
+    insert into t_order_revoke_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="diskOrderRevokeId != null">
+        disk_order_revoke_id,
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id,
+      </if>
+      <if test="vender != null">
+        vender,
+      </if>
+      <if test="revokeOrst != null">
+        revoke_orst,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="errorCode != null">
+        error_code,
+      </if>
+      <if test="errorMessage != null">
+        error_message,
+      </if>
+      <if test="orderBookId != null">
+        order_book_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="diskOrderRevokeId != null">
+        #{diskOrderRevokeId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="revokeOrst != null">
+        #{revokeOrst,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorCode != null">
+        #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        #{orderBookId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.RevokeOrderRecord">
+    update t_order_revoke_record
+    <set>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="vender != null">
+        vender = #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="revokeOrst != null">
+        revoke_orst = #{revokeOrst,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorCode != null">
+        error_code = #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMessage != null">
+        error_message = #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        order_book_id = #{orderBookId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where disk_order_revoke_id = #{diskOrderRevokeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.RevokeOrderRecord">
+    update t_order_revoke_record
+    set disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      vender = #{vender,jdbcType=VARCHAR},
+      revoke_orst = #{revokeOrst,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      error_code = #{errorCode,jdbcType=VARCHAR},
+      error_message = #{errorMessage,jdbcType=VARCHAR},
+      order_book_id = #{orderBookId,jdbcType=VARCHAR}
+    where disk_order_revoke_id = #{diskOrderRevokeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

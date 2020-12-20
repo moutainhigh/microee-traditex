@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.HedgingOrderTableMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.HedgingOrderTable">
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="disk_client_order_id" jdbcType="VARCHAR" property="diskClientOrderId" />
+    <result column="disk_match_id" jdbcType="VARCHAR" property="diskMatchId" />
+    <result column="disk_filled_amount" jdbcType="VARCHAR" property="diskFilledAmount" />
+    <result column="disk_trade_time" jdbcType="BIGINT" property="diskTradeTime" />
+    <result column="side" jdbcType="CHAR" property="side" />
+    <result column="before_balance" jdbcType="DECIMAL" property="beforeBalance" />
+    <result column="instrument" jdbcType="VARCHAR" property="instrument" />
+    <result column="pricing" jdbcType="DECIMAL" property="pricing" />
+    <result column="unit" jdbcType="DECIMAL" property="unit" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="create_order_result" jdbcType="VARCHAR" property="createOrderResult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, disk_client_order_id, disk_match_id, disk_filled_amount, disk_trade_time, 
+    side, before_balance, instrument, pricing, unit, created_at, create_order_result
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_hedging_table
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.HedgingOrderTable">
+    insert into t_order_hedging_table (order_id, disk_client_order_id, disk_match_id, 
+      disk_filled_amount, disk_trade_time, side, 
+      before_balance, instrument, pricing, 
+      unit, created_at, create_order_result
+      )
+    values (#{orderId,jdbcType=VARCHAR}, #{diskClientOrderId,jdbcType=VARCHAR}, #{diskMatchId,jdbcType=VARCHAR}, 
+      #{diskFilledAmount,jdbcType=VARCHAR}, #{diskTradeTime,jdbcType=BIGINT}, #{side,jdbcType=CHAR}, 
+      #{beforeBalance,jdbcType=DECIMAL}, #{instrument,jdbcType=VARCHAR}, #{pricing,jdbcType=DECIMAL}, 
+      #{unit,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{createOrderResult,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.HedgingOrderTable">
+    insert into t_order_hedging_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="diskClientOrderId != null">
+        disk_client_order_id,
+      </if>
+      <if test="diskMatchId != null">
+        disk_match_id,
+      </if>
+      <if test="diskFilledAmount != null">
+        disk_filled_amount,
+      </if>
+      <if test="diskTradeTime != null">
+        disk_trade_time,
+      </if>
+      <if test="side != null">
+        side,
+      </if>
+      <if test="beforeBalance != null">
+        before_balance,
+      </if>
+      <if test="instrument != null">
+        instrument,
+      </if>
+      <if test="pricing != null">
+        pricing,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="createOrderResult != null">
+        create_order_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskClientOrderId != null">
+        #{diskClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskMatchId != null">
+        #{diskMatchId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFilledAmount != null">
+        #{diskFilledAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="diskTradeTime != null">
+        #{diskTradeTime,jdbcType=BIGINT},
+      </if>
+      <if test="side != null">
+        #{side,jdbcType=CHAR},
+      </if>
+      <if test="beforeBalance != null">
+        #{beforeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="instrument != null">
+        #{instrument,jdbcType=VARCHAR},
+      </if>
+      <if test="pricing != null">
+        #{pricing,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOrderResult != null">
+        #{createOrderResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.HedgingOrderTable">
+    update t_order_hedging_table
+    <set>
+      <if test="diskClientOrderId != null">
+        disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskMatchId != null">
+        disk_match_id = #{diskMatchId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskFilledAmount != null">
+        disk_filled_amount = #{diskFilledAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="diskTradeTime != null">
+        disk_trade_time = #{diskTradeTime,jdbcType=BIGINT},
+      </if>
+      <if test="side != null">
+        side = #{side,jdbcType=CHAR},
+      </if>
+      <if test="beforeBalance != null">
+        before_balance = #{beforeBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="instrument != null">
+        instrument = #{instrument,jdbcType=VARCHAR},
+      </if>
+      <if test="pricing != null">
+        pricing = #{pricing,jdbcType=DECIMAL},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOrderResult != null">
+        create_order_result = #{createOrderResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.HedgingOrderTable">
+    update t_order_hedging_table
+    set disk_client_order_id = #{diskClientOrderId,jdbcType=VARCHAR},
+      disk_match_id = #{diskMatchId,jdbcType=VARCHAR},
+      disk_filled_amount = #{diskFilledAmount,jdbcType=VARCHAR},
+      disk_trade_time = #{diskTradeTime,jdbcType=BIGINT},
+      side = #{side,jdbcType=CHAR},
+      before_balance = #{beforeBalance,jdbcType=DECIMAL},
+      instrument = #{instrument,jdbcType=VARCHAR},
+      pricing = #{pricing,jdbcType=DECIMAL},
+      unit = #{unit,jdbcType=DECIMAL},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      create_order_result = #{createOrderResult,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.microee.traditex.liqui.app.mappers.OrderbookStreamMapper">
+    
+    <insert id="insertList" parameterType="java.util.List">
+        insert into t_orderbook_stream
+        (order_book_id,book_id,symbol,side,amount,price,vender,cal_type,pick,skip_code,emitter_time,reveive_time,created_at)
+        values
+        <foreach collection="list" item="element" index="index"
+            separator=",">
+            (
+            #{element.orderBookId,jdbcType=VARCHAR},#{element.bookId,jdbcType=VARCHAR},#{element.symbol,jdbcType=VARCHAR},#{element.side,jdbcType=CHAR},
+            #{element.amount,jdbcType=VARCHAR},#{element.price,jdbcType=VARCHAR},#{element.vender,jdbcType=VARCHAR},
+            #{element.calType,jdbcType=INTEGER},#{element.pick,jdbcType=INTEGER},#{element.skipCode,jdbcType=INTEGER},
+            #{element.emitterTime,jdbcType=TIMESTAMP},#{element.reveiveTime,jdbcType=TIMESTAMP},#{element.createdAt,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectByBookId" parameterType="java.lang.String"
+        resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_orderbook_stream
+        where book_id =
+        #{bookId,jdbcType=VARCHAR} limit 1
+    </select>
+
+</mapper>

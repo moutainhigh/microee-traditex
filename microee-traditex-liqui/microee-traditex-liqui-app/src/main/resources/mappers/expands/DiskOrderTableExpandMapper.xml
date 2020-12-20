@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.microee.traditex.liqui.app.mappers.DiskOrderTableMapper">
+    <insert id="insertList" parameterType="java.util.List">
+        insert into t_order_disk_table (disk_client_order_id,
+        disk_result_order_id,
+        vender, target_symbol, target_side,
+        target_amount, target_price, usdt_price, usd_currency_pricing,
+        usdt_usd_rate, disk_amount, disk_price,
+        disk_price_prec,
+        disk_amount_prec, disk_order_type,
+        disk_account,
+        disk_order_result,
+        disk_ocst, created_at, order_book_id
+        )
+        values
+        <foreach collection="list" item="element" index="index"
+            separator=",">
+            (
+            #{element.diskClientOrderId,jdbcType=VARCHAR},
+            #{element.diskResultOrderId,jdbcType=VARCHAR},
+            #{element.vender,jdbcType=VARCHAR},
+            #{element.targetSymbol,jdbcType=VARCHAR},
+            #{element.targetSide,jdbcType=CHAR},
+            #{element.targetAmount,jdbcType=VARCHAR},
+            #{element.targetPrice,jdbcType=VARCHAR},
+            #{element.usdtPrice,jdbcType=VARCHAR},
+            #{element.usdCurrencyPricing,jdbcType=VARCHAR},
+            #{element.usdtUsdRate,jdbcType=VARCHAR},
+            #{element.diskAmount,jdbcType=VARCHAR},
+            #{element.diskPrice,jdbcType=VARCHAR},
+            #{element.diskPricePrec,jdbcType=VARCHAR},
+            #{element.diskAmountPrec,jdbcType=VARCHAR},
+            #{element.diskOrderType,jdbcType=VARCHAR},
+            #{element.diskAccount,jdbcType=VARCHAR},
+            #{element.diskOrderResult,jdbcType=VARCHAR},
+            #{element.diskOcst,jdbcType=INTEGER},
+            #{element.createdAt,jdbcType=TIMESTAMP},
+            #{element.orderBookId,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>

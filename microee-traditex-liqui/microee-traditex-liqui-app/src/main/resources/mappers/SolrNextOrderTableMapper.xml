@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.SolrNextOrderTableMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.SolrNextOrderTable">
+    <id column="next_solr_id" jdbcType="VARCHAR" property="nextSolrId" />
+    <result column="solr_client_order_id" jdbcType="VARCHAR" property="solrClientOrderId" />
+    <result column="solr_symbol" jdbcType="VARCHAR" property="solrSymbol" />
+    <result column="solr_side" jdbcType="CHAR" property="solrSide" />
+    <result column="solr_order_type" jdbcType="VARCHAR" property="solrOrderType" />
+    <result column="next_solr_quantity" jdbcType="DECIMAL" property="nextSolrQuantity" />
+    <result column="disk_result_order_id" jdbcType="VARCHAR" property="diskResultOrderId" />
+    <result column="disk_symbol" jdbcType="VARCHAR" property="diskSymbol" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    next_solr_id, solr_client_order_id, solr_symbol, solr_side, solr_order_type, next_solr_quantity, 
+    disk_result_order_id, disk_symbol, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_solr_next
+    where next_solr_id = #{nextSolrId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.SolrNextOrderTable">
+    insert into t_order_solr_next (next_solr_id, solr_client_order_id, solr_symbol, 
+      solr_side, solr_order_type, next_solr_quantity, 
+      disk_result_order_id, disk_symbol, created_at
+      )
+    values (#{nextSolrId,jdbcType=VARCHAR}, #{solrClientOrderId,jdbcType=VARCHAR}, #{solrSymbol,jdbcType=VARCHAR}, 
+      #{solrSide,jdbcType=CHAR}, #{solrOrderType,jdbcType=VARCHAR}, #{nextSolrQuantity,jdbcType=DECIMAL}, 
+      #{diskResultOrderId,jdbcType=VARCHAR}, #{diskSymbol,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.SolrNextOrderTable">
+    insert into t_order_solr_next
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nextSolrId != null">
+        next_solr_id,
+      </if>
+      <if test="solrClientOrderId != null">
+        solr_client_order_id,
+      </if>
+      <if test="solrSymbol != null">
+        solr_symbol,
+      </if>
+      <if test="solrSide != null">
+        solr_side,
+      </if>
+      <if test="solrOrderType != null">
+        solr_order_type,
+      </if>
+      <if test="nextSolrQuantity != null">
+        next_solr_quantity,
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id,
+      </if>
+      <if test="diskSymbol != null">
+        disk_symbol,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nextSolrId != null">
+        #{nextSolrId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrClientOrderId != null">
+        #{solrClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSymbol != null">
+        #{solrSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSide != null">
+        #{solrSide,jdbcType=CHAR},
+      </if>
+      <if test="solrOrderType != null">
+        #{solrOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="nextSolrQuantity != null">
+        #{nextSolrQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="diskResultOrderId != null">
+        #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskSymbol != null">
+        #{diskSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.SolrNextOrderTable">
+    update t_order_solr_next
+    <set>
+      <if test="solrClientOrderId != null">
+        solr_client_order_id = #{solrClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSymbol != null">
+        solr_symbol = #{solrSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSide != null">
+        solr_side = #{solrSide,jdbcType=CHAR},
+      </if>
+      <if test="solrOrderType != null">
+        solr_order_type = #{solrOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="nextSolrQuantity != null">
+        next_solr_quantity = #{nextSolrQuantity,jdbcType=DECIMAL},
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskSymbol != null">
+        disk_symbol = #{diskSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where next_solr_id = #{nextSolrId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.SolrNextOrderTable">
+    update t_order_solr_next
+    set solr_client_order_id = #{solrClientOrderId,jdbcType=VARCHAR},
+      solr_symbol = #{solrSymbol,jdbcType=VARCHAR},
+      solr_side = #{solrSide,jdbcType=CHAR},
+      solr_order_type = #{solrOrderType,jdbcType=VARCHAR},
+      next_solr_quantity = #{nextSolrQuantity,jdbcType=DECIMAL},
+      disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      disk_symbol = #{diskSymbol,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where next_solr_id = #{nextSolrId,jdbcType=VARCHAR}
+  </update>
+</mapper>

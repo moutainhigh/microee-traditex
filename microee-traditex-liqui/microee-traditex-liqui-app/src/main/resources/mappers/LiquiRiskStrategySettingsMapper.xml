@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.liqui.app.mappers.LiquiRiskStrategySettingsMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="liquidity_symbol" jdbcType="VARCHAR" property="liquiditySymbol" />
+    <result column="disk_hedge_symbol" jdbcType="VARCHAR" property="diskHedgeSymbol" />
+    <result column="exchange_hedge_symbol" jdbcType="VARCHAR" property="exchangeHedgeSymbol" />
+    <result column="disk_base" jdbcType="VARCHAR" property="diskBase" />
+    <result column="disk_quote" jdbcType="VARCHAR" property="diskQuote" />
+    <result column="exchange_base" jdbcType="VARCHAR" property="exchangeBase" />
+    <result column="exchange_quote" jdbcType="VARCHAR" property="exchangeQuote" />
+    <result column="buy_state" jdbcType="INTEGER" property="buyState" />
+    <result column="sell_state" jdbcType="INTEGER" property="sellState" />
+    <result column="depth_step" jdbcType="INTEGER" property="depthStep" />
+    <result column="buy_money_limit" jdbcType="VARCHAR" property="buyMoneyLimit" />
+    <result column="sell_money_limit" jdbcType="VARCHAR" property="sellMoneyLimit" />
+    <result column="price_precson" jdbcType="INTEGER" property="pricePrecson" />
+    <result column="quantity_precson" jdbcType="INTEGER" property="quantityPrecson" />
+    <result column="disk_buy_precson" jdbcType="INTEGER" property="diskBuyPrecson" />
+    <result column="disk_sell_precson" jdbcType="INTEGER" property="diskSellPrecson" />
+    <result column="disk_price_scale_max" jdbcType="VARCHAR" property="diskPriceScaleMax" />
+    <result column="disk_price_scale_min" jdbcType="VARCHAR" property="diskPriceScaleMin" />
+    <result column="exchange_buy_price_precson" jdbcType="INTEGER" property="exchangeBuyPricePrecson" />
+    <result column="exchange_sell_price_precson" jdbcType="INTEGER" property="exchangeSellPricePrecson" />
+    <result column="exchange_config" jdbcType="VARCHAR" property="exchangeConfig" />
+    <result column="gmt_created" jdbcType="TIMESTAMP" property="gmtCreated" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    <result column="buy_price_incr_rate" jdbcType="LONGVARCHAR" property="buyPriceIncrRate" />
+    <result column="sell_price_incr_rate" jdbcType="LONGVARCHAR" property="sellPriceIncrRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, liquidity_symbol, disk_hedge_symbol, exchange_hedge_symbol, disk_base, disk_quote, 
+    exchange_base, exchange_quote, buy_state, sell_state, depth_step, buy_money_limit, 
+    sell_money_limit, price_precson, quantity_precson, disk_buy_precson, disk_sell_precson, 
+    disk_price_scale_max, disk_price_scale_min, exchange_buy_price_precson, exchange_sell_price_precson, 
+    exchange_config, gmt_created, gmt_modified, operator_id
+  </sql>
+  <sql id="Blob_Column_List">
+    buy_price_incr_rate, sell_price_incr_rate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_liquidity_strategy_settings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_liquidity_strategy_settings (liquidity_symbol, disk_hedge_symbol, 
+      exchange_hedge_symbol, disk_base, disk_quote, 
+      exchange_base, exchange_quote, buy_state, 
+      sell_state, depth_step, buy_money_limit, 
+      sell_money_limit, price_precson, quantity_precson, 
+      disk_buy_precson, disk_sell_precson, disk_price_scale_max, 
+      disk_price_scale_min, exchange_buy_price_precson, 
+      exchange_sell_price_precson, exchange_config, 
+      gmt_created, gmt_modified, operator_id, 
+      buy_price_incr_rate, sell_price_incr_rate
+      )
+    values (#{liquiditySymbol,jdbcType=VARCHAR}, #{diskHedgeSymbol,jdbcType=VARCHAR}, 
+      #{exchangeHedgeSymbol,jdbcType=VARCHAR}, #{diskBase,jdbcType=VARCHAR}, #{diskQuote,jdbcType=VARCHAR}, 
+      #{exchangeBase,jdbcType=VARCHAR}, #{exchangeQuote,jdbcType=VARCHAR}, #{buyState,jdbcType=INTEGER}, 
+      #{sellState,jdbcType=INTEGER}, #{depthStep,jdbcType=INTEGER}, #{buyMoneyLimit,jdbcType=VARCHAR}, 
+      #{sellMoneyLimit,jdbcType=VARCHAR}, #{pricePrecson,jdbcType=INTEGER}, #{quantityPrecson,jdbcType=INTEGER}, 
+      #{diskBuyPrecson,jdbcType=INTEGER}, #{diskSellPrecson,jdbcType=INTEGER}, #{diskPriceScaleMax,jdbcType=VARCHAR}, 
+      #{diskPriceScaleMin,jdbcType=VARCHAR}, #{exchangeBuyPricePrecson,jdbcType=INTEGER}, 
+      #{exchangeSellPricePrecson,jdbcType=INTEGER}, #{exchangeConfig,jdbcType=VARCHAR}, 
+      #{gmtCreated,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=INTEGER}, 
+      #{buyPriceIncrRate,jdbcType=LONGVARCHAR}, #{sellPriceIncrRate,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_liquidity_strategy_settings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="liquiditySymbol != null">
+        liquidity_symbol,
+      </if>
+      <if test="diskHedgeSymbol != null">
+        disk_hedge_symbol,
+      </if>
+      <if test="exchangeHedgeSymbol != null">
+        exchange_hedge_symbol,
+      </if>
+      <if test="diskBase != null">
+        disk_base,
+      </if>
+      <if test="diskQuote != null">
+        disk_quote,
+      </if>
+      <if test="exchangeBase != null">
+        exchange_base,
+      </if>
+      <if test="exchangeQuote != null">
+        exchange_quote,
+      </if>
+      <if test="buyState != null">
+        buy_state,
+      </if>
+      <if test="sellState != null">
+        sell_state,
+      </if>
+      <if test="depthStep != null">
+        depth_step,
+      </if>
+      <if test="buyMoneyLimit != null">
+        buy_money_limit,
+      </if>
+      <if test="sellMoneyLimit != null">
+        sell_money_limit,
+      </if>
+      <if test="pricePrecson != null">
+        price_precson,
+      </if>
+      <if test="quantityPrecson != null">
+        quantity_precson,
+      </if>
+      <if test="diskBuyPrecson != null">
+        disk_buy_precson,
+      </if>
+      <if test="diskSellPrecson != null">
+        disk_sell_precson,
+      </if>
+      <if test="diskPriceScaleMax != null">
+        disk_price_scale_max,
+      </if>
+      <if test="diskPriceScaleMin != null">
+        disk_price_scale_min,
+      </if>
+      <if test="exchangeBuyPricePrecson != null">
+        exchange_buy_price_precson,
+      </if>
+      <if test="exchangeSellPricePrecson != null">
+        exchange_sell_price_precson,
+      </if>
+      <if test="exchangeConfig != null">
+        exchange_config,
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="buyPriceIncrRate != null">
+        buy_price_incr_rate,
+      </if>
+      <if test="sellPriceIncrRate != null">
+        sell_price_incr_rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="liquiditySymbol != null">
+        #{liquiditySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskHedgeSymbol != null">
+        #{diskHedgeSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeHedgeSymbol != null">
+        #{exchangeHedgeSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskBase != null">
+        #{diskBase,jdbcType=VARCHAR},
+      </if>
+      <if test="diskQuote != null">
+        #{diskQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBase != null">
+        #{exchangeBase,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeQuote != null">
+        #{exchangeQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="buyState != null">
+        #{buyState,jdbcType=INTEGER},
+      </if>
+      <if test="sellState != null">
+        #{sellState,jdbcType=INTEGER},
+      </if>
+      <if test="depthStep != null">
+        #{depthStep,jdbcType=INTEGER},
+      </if>
+      <if test="buyMoneyLimit != null">
+        #{buyMoneyLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMoneyLimit != null">
+        #{sellMoneyLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePrecson != null">
+        #{pricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="quantityPrecson != null">
+        #{quantityPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskBuyPrecson != null">
+        #{diskBuyPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskSellPrecson != null">
+        #{diskSellPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskPriceScaleMax != null">
+        #{diskPriceScaleMax,jdbcType=VARCHAR},
+      </if>
+      <if test="diskPriceScaleMin != null">
+        #{diskPriceScaleMin,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBuyPricePrecson != null">
+        #{exchangeBuyPricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeSellPricePrecson != null">
+        #{exchangeSellPricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeConfig != null">
+        #{exchangeConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="buyPriceIncrRate != null">
+        #{buyPriceIncrRate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellPriceIncrRate != null">
+        #{sellPriceIncrRate,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    update t_liquidity_strategy_settings
+    <set>
+      <if test="liquiditySymbol != null">
+        liquidity_symbol = #{liquiditySymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskHedgeSymbol != null">
+        disk_hedge_symbol = #{diskHedgeSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeHedgeSymbol != null">
+        exchange_hedge_symbol = #{exchangeHedgeSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="diskBase != null">
+        disk_base = #{diskBase,jdbcType=VARCHAR},
+      </if>
+      <if test="diskQuote != null">
+        disk_quote = #{diskQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBase != null">
+        exchange_base = #{exchangeBase,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeQuote != null">
+        exchange_quote = #{exchangeQuote,jdbcType=VARCHAR},
+      </if>
+      <if test="buyState != null">
+        buy_state = #{buyState,jdbcType=INTEGER},
+      </if>
+      <if test="sellState != null">
+        sell_state = #{sellState,jdbcType=INTEGER},
+      </if>
+      <if test="depthStep != null">
+        depth_step = #{depthStep,jdbcType=INTEGER},
+      </if>
+      <if test="buyMoneyLimit != null">
+        buy_money_limit = #{buyMoneyLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="sellMoneyLimit != null">
+        sell_money_limit = #{sellMoneyLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="pricePrecson != null">
+        price_precson = #{pricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="quantityPrecson != null">
+        quantity_precson = #{quantityPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskBuyPrecson != null">
+        disk_buy_precson = #{diskBuyPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskSellPrecson != null">
+        disk_sell_precson = #{diskSellPrecson,jdbcType=INTEGER},
+      </if>
+      <if test="diskPriceScaleMax != null">
+        disk_price_scale_max = #{diskPriceScaleMax,jdbcType=VARCHAR},
+      </if>
+      <if test="diskPriceScaleMin != null">
+        disk_price_scale_min = #{diskPriceScaleMin,jdbcType=VARCHAR},
+      </if>
+      <if test="exchangeBuyPricePrecson != null">
+        exchange_buy_price_precson = #{exchangeBuyPricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeSellPricePrecson != null">
+        exchange_sell_price_precson = #{exchangeSellPricePrecson,jdbcType=INTEGER},
+      </if>
+      <if test="exchangeConfig != null">
+        exchange_config = #{exchangeConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreated != null">
+        gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="buyPriceIncrRate != null">
+        buy_price_incr_rate = #{buyPriceIncrRate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sellPriceIncrRate != null">
+        sell_price_incr_rate = #{sellPriceIncrRate,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    update t_liquidity_strategy_settings
+    set liquidity_symbol = #{liquiditySymbol,jdbcType=VARCHAR},
+      disk_hedge_symbol = #{diskHedgeSymbol,jdbcType=VARCHAR},
+      exchange_hedge_symbol = #{exchangeHedgeSymbol,jdbcType=VARCHAR},
+      disk_base = #{diskBase,jdbcType=VARCHAR},
+      disk_quote = #{diskQuote,jdbcType=VARCHAR},
+      exchange_base = #{exchangeBase,jdbcType=VARCHAR},
+      exchange_quote = #{exchangeQuote,jdbcType=VARCHAR},
+      buy_state = #{buyState,jdbcType=INTEGER},
+      sell_state = #{sellState,jdbcType=INTEGER},
+      depth_step = #{depthStep,jdbcType=INTEGER},
+      buy_money_limit = #{buyMoneyLimit,jdbcType=VARCHAR},
+      sell_money_limit = #{sellMoneyLimit,jdbcType=VARCHAR},
+      price_precson = #{pricePrecson,jdbcType=INTEGER},
+      quantity_precson = #{quantityPrecson,jdbcType=INTEGER},
+      disk_buy_precson = #{diskBuyPrecson,jdbcType=INTEGER},
+      disk_sell_precson = #{diskSellPrecson,jdbcType=INTEGER},
+      disk_price_scale_max = #{diskPriceScaleMax,jdbcType=VARCHAR},
+      disk_price_scale_min = #{diskPriceScaleMin,jdbcType=VARCHAR},
+      exchange_buy_price_precson = #{exchangeBuyPricePrecson,jdbcType=INTEGER},
+      exchange_sell_price_precson = #{exchangeSellPricePrecson,jdbcType=INTEGER},
+      exchange_config = #{exchangeConfig,jdbcType=VARCHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      buy_price_incr_rate = #{buyPriceIncrRate,jdbcType=LONGVARCHAR},
+      sell_price_incr_rate = #{sellPriceIncrRate,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.liqui.oem.models.LiquiRiskStrategySettings">
+    update t_liquidity_strategy_settings
+    set liquidity_symbol = #{liquiditySymbol,jdbcType=VARCHAR},
+      disk_hedge_symbol = #{diskHedgeSymbol,jdbcType=VARCHAR},
+      exchange_hedge_symbol = #{exchangeHedgeSymbol,jdbcType=VARCHAR},
+      disk_base = #{diskBase,jdbcType=VARCHAR},
+      disk_quote = #{diskQuote,jdbcType=VARCHAR},
+      exchange_base = #{exchangeBase,jdbcType=VARCHAR},
+      exchange_quote = #{exchangeQuote,jdbcType=VARCHAR},
+      buy_state = #{buyState,jdbcType=INTEGER},
+      sell_state = #{sellState,jdbcType=INTEGER},
+      depth_step = #{depthStep,jdbcType=INTEGER},
+      buy_money_limit = #{buyMoneyLimit,jdbcType=VARCHAR},
+      sell_money_limit = #{sellMoneyLimit,jdbcType=VARCHAR},
+      price_precson = #{pricePrecson,jdbcType=INTEGER},
+      quantity_precson = #{quantityPrecson,jdbcType=INTEGER},
+      disk_buy_precson = #{diskBuyPrecson,jdbcType=INTEGER},
+      disk_sell_precson = #{diskSellPrecson,jdbcType=INTEGER},
+      disk_price_scale_max = #{diskPriceScaleMax,jdbcType=VARCHAR},
+      disk_price_scale_min = #{diskPriceScaleMin,jdbcType=VARCHAR},
+      exchange_buy_price_precson = #{exchangeBuyPricePrecson,jdbcType=INTEGER},
+      exchange_sell_price_precson = #{exchangeSellPricePrecson,jdbcType=INTEGER},
+      exchange_config = #{exchangeConfig,jdbcType=VARCHAR},
+      gmt_created = #{gmtCreated,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

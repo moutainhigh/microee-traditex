@@ -1,0 +1,100 @@
+
+info:
+  name: microee-traditex-liqui-app
+  version: 1.0
+  pubtime: 1601547280482
+
+tomcat:
+  apr: false
+
+# eureka
+eureka:
+  client:
+    enabled: false
+    healthcheck: false
+
+redis:
+  database: 0
+  timeout: 1000
+  port: 6379
+  host: 127.0.0.1
+  pool:
+    max-active: 100
+    max-idle: 20
+    min-idle: 5
+    max-wait: 1000
+
+kafka:
+  bootstrap-servers: 127.0.0.1:9092
+  consumer:
+    group-id: microee-traditex-liqui-app
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# Datasource
+spring.datasource:
+  name: mybatis-lab-service_DS
+  type: com.zaxxer.hikari.HikariDataSource
+  driver-class-name: com.mysql.jdbc.Driver
+  hikari:
+    poolName: HikariConnectionPool
+    maximumPoolSize: 20
+    minimumIdle: 1
+    autoCommit: true
+    idleTimeout: 600000
+    maxLifetime: 1800000
+    connectionTimeout: 10000
+  url: jdbc:mysql://127.0.0.1:3306/liquis_db_local?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&failOverReadOnly=false&useAffectedRows=true&supportBigNumbers=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+  username: keesh
+  password: Cc
+  initialization-mode: always
+  #schema: classpath:schemas/liquis_table.sql
+  
+micro:
+  services:
+    microee-traditex-inbox-app:
+      listOfServers: http://127.0.0.1:28081
+      
+# kafka topics
+topics:
+  liqui:
+    riskalter: __liqui_riskalter_message_topic_${spring.profiles.active}
+  inbox:
+    orderbook: inbox_hbitex_orderbook_message_topic_${spring.profiles.active}
+    pricing: inbox_pricing_stream_topic_${spring.profiles.active}
+    connected: inbox_connected_event_topic_${spring.profiles.active}
+    banalce: inbox_balance_topic_${spring.profiles.active}
+    orderstat: inbox_orderstat_topic_${spring.profiles.active}
+    authevent: inbox_authevent_topic_${spring.profiles.active}
+    subscribe.event: inbox_subscribe_event_topic_${spring.profiles.active}
+    connect.shutdown.event: inbox_connect_shutdown_event_topic_${spring.profiles.active}
+
+# redis topics
+topic:
+  traditex:
+    pricing.message: __traditex.message.pricing_${spring.profiles.active}
+    orderbook.message: __traditex.message.orderbook_${spring.profiles.active}
+    diskorders.message: __traditex.message.diskorders_${spring.profiles.active}
+    revokeorder.count.message: __traditex.message.revokeorder.count_${spring.profiles.active}
+    account.balance.message: __traditex.message.account.balance_${spring.profiles.active}
+    account-disk.balancess.message: __traditex.message.disk-account.balancess_${spring.profiles.active}
+    account-solr.balancess.message: __traditex.message.solr-account.balancess_${spring.profiles.active}
+    httpnetwork.message: __traditex.message.httpnetwork_${spring.profiles.active}
+    httplog.listener.message: __traditex.message.httplog.listener_${spring.profiles.active}
+
+# 美国的夏令时起始时间是3月第二个周日，结束时间是11月第一个周日。
+# 夏令时 周一早上6点到周六早上6点 可以交易
+# 冬令时 周一上午7点到周六上午7点可以交易
+# 流动性摆盘可交易时间(2是周一，7是周六, 1是周日)
+diskTradTime:
+  # 夏令时
+  DaylightSavingTime:
+    week: 2/06:00:00-23:59:59,3/00:00:00-23:59:59,4/00:00:00-23:59:59,5/00:00:00-23:59:59,6/00:00:00-23:59:59,7/00:00:00-06:00:00
+  # 冬令时(即标准时)
+  StandardTime:
+    week: 2/06:00:00-23:59:59,3/00:00:00-23:59:59,4/00:00:00-23:59:59,5/00:00:00-23:59:59,6/00:00:00-23:59:59,7/00:00:00-06:00:00
+    
+    
+
+

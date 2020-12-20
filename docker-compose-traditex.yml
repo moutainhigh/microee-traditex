@@ -1,0 +1,65 @@
+
+## 安装Docker Compose
+# curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+# docker-compose --version
+# docker-compose up -d
+version: '2.4'
+networks:
+    br0:
+      external: true
+
+services:
+  liquidity.inbox:
+    container_name: liquidity.inbox
+    image: chunhui2001/alpine:3.9.tomcat8.5
+    hostname: liquidity.inbox
+    mem_limit: 300m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 18081:18081
+    entrypoint: ["java", "-Djava.library.path=/usr/local/tomcat/native-jni-lib", "-jar", "/root/app/app.jar"]
+    volumes:
+      - ./microee-traditex-inbox-app-1.0-SNAPSHOT.jar:/root/app/app.jar:ro
+    restart: always
+    networks:
+      br0:
+        ipv4_address: 172.16.197.114
+  liquidity.liqui:
+    container_name: liquidity.liqui
+    image: chunhui2001/alpine:3.9.tomcat8.5
+    hostname: liquidity.liqui
+    mem_limit: 300m
+    depends_on:
+      - liquidity.inbox
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 18180:18180
+    entrypoint: ["java", "-Djava.library.path=/usr/local/tomcat/native-jni-lib", "-jar", "/root/app/app.jar"]
+    volumes:
+      - ./microee-traditex-liqui-app-1.0-SNAPSHOT.jar:/root/app/app.jar:ro
+    restart: always
+    networks:
+      br0:
+        ipv4_address: 172.16.197.127
+  liquidity.dashboard:
+    container_name: liquidity.dashboard
+    image: chunhui2001/alpine:3.9.tomcat8.5
+    hostname: liquidity.dashboard
+    mem_limit: 300m
+    depends_on:
+      - liquidity.liqui
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - 18082:18082
+    entrypoint: ["java", "-Djava.library.path=/usr/local/tomcat/native-jni-lib", "-jar", "/root/app/app.jar"]
+    volumes:
+      - ./microee-traditex-dashboard-app-1.0-SNAPSHOT.jar:/root/app/app.jar:ro
+    restart: always
+    networks:
+      br0:
+        ipv4_address: 172.16.197.124
+

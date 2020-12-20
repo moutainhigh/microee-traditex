@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.archive.app.mappers.SolrOrderTableMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.archive.oem.models.SolrOrderTable">
+    <id column="solr_client_order_id" jdbcType="VARCHAR" property="solrClientOrderId" />
+    <result column="solr_result_order_id" jdbcType="VARCHAR" property="solrResultOrderId" />
+    <result column="disk_result_order_id" jdbcType="VARCHAR" property="diskResultOrderId" />
+    <result column="disk_symbol" jdbcType="VARCHAR" property="diskSymbol" />
+    <result column="order_book_id" jdbcType="VARCHAR" property="orderBookId" />
+    <result column="solr_osst" jdbcType="INTEGER" property="solrOsst" />
+    <result column="vender" jdbcType="VARCHAR" property="vender" />
+    <result column="solr_account" jdbcType="VARCHAR" property="solrAccount" />
+    <result column="solr_symbol" jdbcType="VARCHAR" property="solrSymbol" />
+    <result column="solr_side" jdbcType="CHAR" property="solrSide" />
+    <result column="solr_amount" jdbcType="DECIMAL" property="solrAmount" />
+    <result column="solr_price" jdbcType="DECIMAL" property="solrPrice" />
+    <result column="solr_amount_prec" jdbcType="INTEGER" property="solrAmountPrec" />
+    <result column="solr_price_prec" jdbcType="INTEGER" property="solrPricePrec" />
+    <result column="solr_order_amount" jdbcType="DECIMAL" property="solrOrderAmount" />
+    <result column="solr_order_price" jdbcType="DECIMAL" property="solrOrderPrice" />
+    <result column="solr_order_type" jdbcType="VARCHAR" property="solrOrderType" />
+    <result column="usd_currency_pricing" jdbcType="DECIMAL" property="usdCurrencyPricing" />
+    <result column="usdt_usd_rate" jdbcType="DECIMAL" property="usdtUsdRate" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    solr_client_order_id, solr_result_order_id, disk_result_order_id, disk_symbol, order_book_id, 
+    solr_osst, vender, solr_account, solr_symbol, solr_side, solr_amount, solr_price, 
+    solr_amount_prec, solr_price_prec, solr_order_amount, solr_order_price, solr_order_type, 
+    usd_currency_pricing, usdt_usd_rate, created_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_solr_table
+    where solr_client_order_id = #{solrClientOrderId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.archive.oem.models.SolrOrderTable">
+    insert into t_order_solr_table (solr_client_order_id, solr_result_order_id, 
+      disk_result_order_id, disk_symbol, order_book_id, 
+      solr_osst, vender, solr_account, 
+      solr_symbol, solr_side, solr_amount, 
+      solr_price, solr_amount_prec, solr_price_prec, 
+      solr_order_amount, solr_order_price, solr_order_type, 
+      usd_currency_pricing, usdt_usd_rate, created_at
+      )
+    values (#{solrClientOrderId,jdbcType=VARCHAR}, #{solrResultOrderId,jdbcType=VARCHAR}, 
+      #{diskResultOrderId,jdbcType=VARCHAR}, #{diskSymbol,jdbcType=VARCHAR}, #{orderBookId,jdbcType=VARCHAR}, 
+      #{solrOsst,jdbcType=INTEGER}, #{vender,jdbcType=VARCHAR}, #{solrAccount,jdbcType=VARCHAR}, 
+      #{solrSymbol,jdbcType=VARCHAR}, #{solrSide,jdbcType=CHAR}, #{solrAmount,jdbcType=DECIMAL}, 
+      #{solrPrice,jdbcType=DECIMAL}, #{solrAmountPrec,jdbcType=INTEGER}, #{solrPricePrec,jdbcType=INTEGER}, 
+      #{solrOrderAmount,jdbcType=DECIMAL}, #{solrOrderPrice,jdbcType=DECIMAL}, #{solrOrderType,jdbcType=VARCHAR}, 
+      #{usdCurrencyPricing,jdbcType=DECIMAL}, #{usdtUsdRate,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.archive.oem.models.SolrOrderTable">
+    insert into t_order_solr_table
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="solrClientOrderId != null">
+        solr_client_order_id,
+      </if>
+      <if test="solrResultOrderId != null">
+        solr_result_order_id,
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id,
+      </if>
+      <if test="diskSymbol != null">
+        disk_symbol,
+      </if>
+      <if test="orderBookId != null">
+        order_book_id,
+      </if>
+      <if test="solrOsst != null">
+        solr_osst,
+      </if>
+      <if test="vender != null">
+        vender,
+      </if>
+      <if test="solrAccount != null">
+        solr_account,
+      </if>
+      <if test="solrSymbol != null">
+        solr_symbol,
+      </if>
+      <if test="solrSide != null">
+        solr_side,
+      </if>
+      <if test="solrAmount != null">
+        solr_amount,
+      </if>
+      <if test="solrPrice != null">
+        solr_price,
+      </if>
+      <if test="solrAmountPrec != null">
+        solr_amount_prec,
+      </if>
+      <if test="solrPricePrec != null">
+        solr_price_prec,
+      </if>
+      <if test="solrOrderAmount != null">
+        solr_order_amount,
+      </if>
+      <if test="solrOrderPrice != null">
+        solr_order_price,
+      </if>
+      <if test="solrOrderType != null">
+        solr_order_type,
+      </if>
+      <if test="usdCurrencyPricing != null">
+        usd_currency_pricing,
+      </if>
+      <if test="usdtUsdRate != null">
+        usdt_usd_rate,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="solrClientOrderId != null">
+        #{solrClientOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrResultOrderId != null">
+        #{solrResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskSymbol != null">
+        #{diskSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        #{orderBookId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrOsst != null">
+        #{solrOsst,jdbcType=INTEGER},
+      </if>
+      <if test="vender != null">
+        #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="solrAccount != null">
+        #{solrAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSymbol != null">
+        #{solrSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSide != null">
+        #{solrSide,jdbcType=CHAR},
+      </if>
+      <if test="solrAmount != null">
+        #{solrAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="solrPrice != null">
+        #{solrPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="solrAmountPrec != null">
+        #{solrAmountPrec,jdbcType=INTEGER},
+      </if>
+      <if test="solrPricePrec != null">
+        #{solrPricePrec,jdbcType=INTEGER},
+      </if>
+      <if test="solrOrderAmount != null">
+        #{solrOrderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="solrOrderPrice != null">
+        #{solrOrderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="solrOrderType != null">
+        #{solrOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="usdCurrencyPricing != null">
+        #{usdCurrencyPricing,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtUsdRate != null">
+        #{usdtUsdRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.archive.oem.models.SolrOrderTable">
+    update t_order_solr_table
+    <set>
+      <if test="solrResultOrderId != null">
+        solr_result_order_id = #{solrResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskResultOrderId != null">
+        disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="diskSymbol != null">
+        disk_symbol = #{diskSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="orderBookId != null">
+        order_book_id = #{orderBookId,jdbcType=VARCHAR},
+      </if>
+      <if test="solrOsst != null">
+        solr_osst = #{solrOsst,jdbcType=INTEGER},
+      </if>
+      <if test="vender != null">
+        vender = #{vender,jdbcType=VARCHAR},
+      </if>
+      <if test="solrAccount != null">
+        solr_account = #{solrAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSymbol != null">
+        solr_symbol = #{solrSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="solrSide != null">
+        solr_side = #{solrSide,jdbcType=CHAR},
+      </if>
+      <if test="solrAmount != null">
+        solr_amount = #{solrAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="solrPrice != null">
+        solr_price = #{solrPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="solrAmountPrec != null">
+        solr_amount_prec = #{solrAmountPrec,jdbcType=INTEGER},
+      </if>
+      <if test="solrPricePrec != null">
+        solr_price_prec = #{solrPricePrec,jdbcType=INTEGER},
+      </if>
+      <if test="solrOrderAmount != null">
+        solr_order_amount = #{solrOrderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="solrOrderPrice != null">
+        solr_order_price = #{solrOrderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="solrOrderType != null">
+        solr_order_type = #{solrOrderType,jdbcType=VARCHAR},
+      </if>
+      <if test="usdCurrencyPricing != null">
+        usd_currency_pricing = #{usdCurrencyPricing,jdbcType=DECIMAL},
+      </if>
+      <if test="usdtUsdRate != null">
+        usdt_usd_rate = #{usdtUsdRate,jdbcType=DECIMAL},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where solr_client_order_id = #{solrClientOrderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.archive.oem.models.SolrOrderTable">
+    update t_order_solr_table
+    set solr_result_order_id = #{solrResultOrderId,jdbcType=VARCHAR},
+      disk_result_order_id = #{diskResultOrderId,jdbcType=VARCHAR},
+      disk_symbol = #{diskSymbol,jdbcType=VARCHAR},
+      order_book_id = #{orderBookId,jdbcType=VARCHAR},
+      solr_osst = #{solrOsst,jdbcType=INTEGER},
+      vender = #{vender,jdbcType=VARCHAR},
+      solr_account = #{solrAccount,jdbcType=VARCHAR},
+      solr_symbol = #{solrSymbol,jdbcType=VARCHAR},
+      solr_side = #{solrSide,jdbcType=CHAR},
+      solr_amount = #{solrAmount,jdbcType=DECIMAL},
+      solr_price = #{solrPrice,jdbcType=DECIMAL},
+      solr_amount_prec = #{solrAmountPrec,jdbcType=INTEGER},
+      solr_price_prec = #{solrPricePrec,jdbcType=INTEGER},
+      solr_order_amount = #{solrOrderAmount,jdbcType=DECIMAL},
+      solr_order_price = #{solrOrderPrice,jdbcType=DECIMAL},
+      solr_order_type = #{solrOrderType,jdbcType=VARCHAR},
+      usd_currency_pricing = #{usdCurrencyPricing,jdbcType=DECIMAL},
+      usdt_usd_rate = #{usdtUsdRate,jdbcType=DECIMAL},
+      created_at = #{createdAt,jdbcType=TIMESTAMP}
+    where solr_client_order_id = #{solrClientOrderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

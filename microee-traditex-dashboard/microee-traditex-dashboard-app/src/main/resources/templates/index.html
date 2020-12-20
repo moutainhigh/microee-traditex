@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{fragments/main_layout}">
+<head>
+<title>TradiTex Index Page</title>
+</head>
+<body style="text-align: center;">
+	<div layout:fragment="__main_content" class="container">
+		
+	    <input type="hidden" id="topic_pricing" th:value="${tradiTexPricingTopic}" />
+	    <input type="hidden" id="topic_orderbook" th:value="${tradiTexOrderBookMessageTopic}" />
+	    <input type="hidden" id="topic_diskorders" th:value="${tradiTexDiskOrdersMessageTopic}" />
+	    <input type="hidden" id="topic_httpnetwork" th:value="${tradiTexHttpNetworkMessageTopic}" />
+	    <input type="hidden" id="topic_httplog" th:value="${tradiTexHttpLogListererMessageTopic}" />
+	    <input type="hidden" id="topic_revokeorder" th:value="${tradiTexRevokeOrderCountMessageTopic}" />
+	    <input type="hidden" id="topic_accountBalance" th:value="${tradiTexAccountBalanceMessageTopic}" />
+	    <input type="hidden" id="topic_diskAccount" th:value="${tradiTexAccountDiskBalancessMessageTopic}" />
+        <input type="hidden" id="topic_solrAccount" th:value="${tradiTexAccountSolrBalancessMessageTopic}" />
+	    
+		<div id="root">
+            
+        </div>
+	</div>
+	<th:block layout:fragment="__scripts">
+		
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.microee.traditex.archive.app.mappers.LiquiArchiveRecordMapper">
+  <resultMap id="BaseResultMap" type="com.microee.traditex.archive.oem.models.LiquiArchiveRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="the_table_name" jdbcType="VARCHAR" property="theTableName" />
+    <result column="last_id" jdbcType="VARCHAR" property="lastId" />
+    <result column="rows_count" jdbcType="INTEGER" property="rowsCount" />
+    <result column="last_timestamp" jdbcType="TIMESTAMP" property="lastTimestamp" />
+    <result column="file_id" jdbcType="VARCHAR" property="fileId" />
+    <result column="file_url" jdbcType="VARCHAR" property="fileUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, the_table_name, last_id, rows_count, last_timestamp, file_id, file_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_liquid_archive_record
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.microee.traditex.archive.oem.models.LiquiArchiveRecord">
+    insert into t_liquid_archive_record (id, the_table_name, last_id, 
+      rows_count, last_timestamp, file_id, 
+      file_url)
+    values (#{id,jdbcType=VARCHAR}, #{theTableName,jdbcType=VARCHAR}, #{lastId,jdbcType=VARCHAR}, 
+      #{rowsCount,jdbcType=INTEGER}, #{lastTimestamp,jdbcType=TIMESTAMP}, #{fileId,jdbcType=VARCHAR}, 
+      #{fileUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.microee.traditex.archive.oem.models.LiquiArchiveRecord">
+    insert into t_liquid_archive_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="theTableName != null">
+        the_table_name,
+      </if>
+      <if test="lastId != null">
+        last_id,
+      </if>
+      <if test="rowsCount != null">
+        rows_count,
+      </if>
+      <if test="lastTimestamp != null">
+        last_timestamp,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="fileUrl != null">
+        file_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="theTableName != null">
+        #{theTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastId != null">
+        #{lastId,jdbcType=VARCHAR},
+      </if>
+      <if test="rowsCount != null">
+        #{rowsCount,jdbcType=INTEGER},
+      </if>
+      <if test="lastTimestamp != null">
+        #{lastTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.microee.traditex.archive.oem.models.LiquiArchiveRecord">
+    update t_liquid_archive_record
+    <set>
+      <if test="theTableName != null">
+        the_table_name = #{theTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastId != null">
+        last_id = #{lastId,jdbcType=VARCHAR},
+      </if>
+      <if test="rowsCount != null">
+        rows_count = #{rowsCount,jdbcType=INTEGER},
+      </if>
+      <if test="lastTimestamp != null">
+        last_timestamp = #{lastTimestamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.microee.traditex.archive.oem.models.LiquiArchiveRecord">
+    update t_liquid_archive_record
+    set the_table_name = #{theTableName,jdbcType=VARCHAR},
+      last_id = #{lastId,jdbcType=VARCHAR},
+      rows_count = #{rowsCount,jdbcType=INTEGER},
+      last_timestamp = #{lastTimestamp,jdbcType=TIMESTAMP},
+      file_id = #{fileId,jdbcType=VARCHAR},
+      file_url = #{fileUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

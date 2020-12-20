@@ -1,0 +1,51 @@
+
+tomcat:
+  apr: true
+
+# eureka
+eureka:
+  client:
+    enabled: false
+    healthcheck: false
+      
+### web resources
+resources:
+  locations: classpath:/public/assets/,classpath:/public/oembed/,classpath:/public/RichMedias/
+  handles: /assets/**,/oembed/**,/RichMedias/**
+  public-url: //cdn.microee.com
+
+websocket:
+  endpoint: /_sockjs
+  prefixes: /_ws
+  broker: "/topic,/queue"
+
+
+redis:
+  database: 0
+  timeout: 1000
+  port: 6379
+  host: redis_single
+  pool:
+    max-active: 100
+    max-idle: 20
+    min-idle: 5
+    max-wait: 1000
+  
+micro:
+  services:
+    microee-traditex-liqui-app:
+      listOfServers: http://127.0.0.1:28082
+
+# redis topics
+topic:
+  traditex:
+    pricing.message: __traditex.message.pricing_${spring.profiles.active}
+    orderbook.message: __traditex.message.orderbook_${spring.profiles.active}
+    diskorders.message: __traditex.message.diskorders_${spring.profiles.active}
+    revokeorder.count.message: __traditex.message.revokeorder.count_${spring.profiles.active}
+    account.balance.message: __traditex.message.account.balance_${spring.profiles.active}
+    account-disk.balancess.message: __traditex.message.disk-account.balancess_${spring.profiles.active}
+    account-solr.balancess.message: __traditex.message.solr-account.balancess_${spring.profiles.active}
+    httpnetwork.message: __traditex.message.httpnetwork_${spring.profiles.active}
+    httplog.listener.message: __traditex.message.httplog.listener_${spring.profiles.active}
+    
